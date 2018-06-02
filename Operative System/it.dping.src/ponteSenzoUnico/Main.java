@@ -9,17 +9,17 @@
 		 */
 package ponteSenzoUnico;
 import java.util.concurrent.Semaphore;
-
+/*
 import semaphore4Thread.Coda;
 import semaphore4Thread.Consumer;
 import semaphore4Thread.Producer;
-
+*/
 import java.util.*;
 import java.util.NoSuchElementException;
 
 public class Main {
 
-	public static void main(String args[]){
+	public static void main(String args[]){/*
 		Coda q = new Coda(3);
 		int numeroProduttori = 10;
 		int numeroConsumatori = 10;
@@ -46,7 +46,7 @@ public class Main {
 			e.printStackTrace();
 		}
 	
-	}
+	}*/
 }
 
 }

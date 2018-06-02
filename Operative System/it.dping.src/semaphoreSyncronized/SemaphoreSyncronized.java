@@ -6,5 +6,5 @@ public class SemaphoreSyncronized {
 	Semaphore valueConsumer = new Semaphore(1);
 	int sharedValue;
 	
-	startThreads();
+/*	startThreads();*/
 }
