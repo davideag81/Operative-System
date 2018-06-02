@@ -51,7 +51,7 @@ public class SyncronizedBuffer implements Buffer {
 				// valore letto 
 				--occupiedBuffers;
 				
-				displayState(name + " scrive " + buffer);
+				displayState(name + " legge " + buffer);
 				
 				//notifica al prossimo Thread di uscire da wait
 				notify();
