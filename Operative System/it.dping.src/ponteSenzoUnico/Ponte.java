@@ -1,20 +1,23 @@
 package ponteSenzoUnico;
 
+import java.util.LinkedList;
+
 public class Ponte {	//monitor
-	private int onBridge;
+	private int autoOnBridge;
 	private boolean isEmpty;
 	private Provenienza direzione;
+	private LinkedList<Integer> code[] = new LinkedList<>[2]; //vettore di LinkedList
 	
 	
 	public Ponte() {
 		super();
-		this.onBridge = 0;
+		this.autoOnBridge = 0;
 		this.isEmpty = true;
 		this.direzione = null;
 	}
 	
 	public synchronized void attraversaPonte(Provenienza direzione) {
-		System.err.println(Thread.currentThread().getName() + " Sta per attraversare il ponte");
+		System.out.println(Thread.currentThread().getName() + " Sta per attraversare il ponte");
 		while (this.isEmpty != true && this.direzione != direzione) { // verifica lo stato del ponte
 		try {
 			System.out.println("Il Ponte è occupato nella direzione opposta quindi Aspetta...");
@@ -24,7 +27,7 @@ public class Ponte {	//monitor
 			exc.printStackTrace();
 		}
 		System.out.println(Thread.currentThread().getName() + "Sta transitando sul ponte proveniendo da " + direzione);
-		++onBridge;
+		++autoOnBridge;
 		isEmpty= false;
 		notify();
 		}
