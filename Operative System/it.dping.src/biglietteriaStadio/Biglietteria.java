@@ -31,7 +31,7 @@ public class Biglietteria {
 			bigliettiRilasciati = bigliettiResidui;
 		}
 		bigliettiResidui-=bigliettiRilasciati;
-		//System.out.println("totale in deposito = " + bigliettiResidui);
+		System.out.println("totale in deposito = " + bigliettiResidui);
 		return bigliettiRilasciati;
 	}
 
@@ -56,7 +56,7 @@ public class Biglietteria {
 			//int index = (int) Math.round(Math.random()*(numRivendite-1));
 			c[clientiGenerati] = new Cliente(clientiGenerati, rivendite[index], biglietti);
 			c[clientiGenerati].start();
-			System.out.println("R"+index +" nuovo C"+clientiGenerati+ "-->B"+biglietti);
+			System.out.println("Rivendita "+index +" ha "+clientiGenerati+ " nuovi Clienti che vorrebbe acqistare "+biglietti+" biglietti");
 			try{
 				Thread.sleep(r.nextInt(100));
 			} catch(InterruptedException e){
