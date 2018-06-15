@@ -2,7 +2,7 @@ package elezioniUniversitarie;
 
 import java.util.LinkedList;
 
-public class Seggio {
+public class Seggio2 {
 
 	int idSeggio;
 	int nInCoda = 0;
@@ -14,18 +14,6 @@ public class Seggio {
 	Campus campus;
 	boolean checkCommissione = false;
 	private LinkedList<Integer> codaSeggio = new LinkedList<>();
-	
-	
-	public Seggio(int idSeggio, int nCabine, Campus campus) {
-		super();
-		this.idSeggio = idSeggio;
-		this.nCabine = nCabine;
-		this.statoCabine = new boolean [nCabine];
-		this.campus = campus;
-		for (int i=0; i<statoCabine.length; i++) {
-			statoCabine[i] = false;
-		}
-	}
 	
 	public boolean noCabineLibere() { //controlla se ci sono cabine libere
 		boolean cabineLibere = true;
@@ -48,6 +36,18 @@ public class Seggio {
 		System.out.println();
 	}
 	
+	public Seggio2(int idSeggio, int nCabine, Campus campus) {
+		super();
+		this.idSeggio = idSeggio;
+		this.nCabine = nCabine;
+		
+		this.statoCabine = new boolean [nCabine];
+		this.campus = campus;
+		for (int i=0; i<statoCabine.length; i++) {
+			statoCabine[i] = false;
+		}
+	}
+	
 	public void ordinaCabine()	//Serve per riordinare l'array cabine quando un cliente viene servito
 	{
 		System.out.println("Cabine prima del ricollocamento : ");
@@ -65,6 +65,7 @@ public class Seggio {
 			{
 				statoCabine[i]=statoCabine[j]; //sposto i posti verso verso sinistra
 			}
+
 			i++;
 			j++;
 			c++;
@@ -92,5 +93,32 @@ public class Seggio {
 		for(int tmp : codaSeggio) {
 			System.out.println("Votante #"+ tmp +".\n");
 		}
+		
 	}
-}
+
+	public synchronized void liberaCabina(int i) {
+		statoCabine[i]=true;		//esce dalla cabina 
+		
+
+		cabine[i]++;	//aumento la priorità, cosi dovrò aspettare che tutti abbiano votato almeno una volta
+
+		notifyAll();			//sveglio tutti i thread eventualmente in attesa
+
+		
+	}
+	public synchronized boolean entraCabina(int i) {
+		while(!statoCabine[i] || cabine[i]>cabine[(i+1)%nCabine]) {
+			try
+			{
+				wait();
+			}
+			catch(InterruptedException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		statoCabine[i]=false;		//entra in una cabina come metodo synchronized è come se fosse operazione atomica
+	
+		return statoCabine[i];
+	}
+	}
