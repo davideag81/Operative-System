@@ -11,7 +11,7 @@ public class Seggio {
 		for(int i =0 ; i < r ; i++ ) { 	//da 1 a 5 cabine	
 		this.cabine[i] = false ;
 		this.contatoreVotanti = 0;	// inizializza variabile di condizione
-		System.out.println("Il seggio #"+ Thread.currentThread().getName()+" ha "+ r +" cabine.");
+		System.out.println("Il seggio #"+ i +" ha "+ r +" cabine.");
 		}
 	}
 	
@@ -70,13 +70,15 @@ public class Seggio {
 	}
 	
 	public synchronized void accediAllaCabina(int idVotante) {
-		if (noCabineLibere() == true) {
+		while (noCabineLibere() == true) {
 			System.out.println("Non ci sono cabine libere. Votante #" + idVotante + " attendi...");
 			try {
 				wait();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			// Thread.currentThread().sleep(1000);
+			System.out.println("Il Votante ha votato!");
 		}
 		contatoreVotanti++;
 		cabine[(contatoreVotanti - 1)] = true;

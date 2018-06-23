@@ -3,6 +3,7 @@ package elezioniSemplificato;
 public class Votante extends Thread {
 	int tipoVotante[];
 	Seggio seggio;	// monitor
+	
 	boolean haVotato = false;
 	
 	public Votante(Seggio seggio, /*int[] tipoVotante, */int id) {
@@ -11,6 +12,13 @@ public class Votante extends Thread {
 		this.seggio = seggio;
 	}
 	
+	public void get() {
+		
+	}
+	
+	public void set() {
+		
+	}
 	
 
 }
