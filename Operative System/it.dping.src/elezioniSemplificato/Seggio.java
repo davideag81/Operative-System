@@ -1,24 +1,14 @@
 package elezioniSemplificato;
 
 public class Seggio {
-
-	private int r = (int)(Math.random()*5);
-	private boolean [] cabine = new boolean [r]; 		//variabile condivisa
+	int cabine = 3;	// buffer condiviso
+	private boolean [] cabin = new boolean [cabine]; 		// contatore variabile condivisa
 	private int contatoreVotanti; 		//condiction
-	
-	// costruttore seggio, numero di cabine casuali
-	public Seggio() {
-		for(int i =0 ; i < r ; i++ ) { 	//da 1 a 5 cabine	
-		this.cabine[i] = false ;
-		this.contatoreVotanti = 0;	// inizializza variabile di condizione
-		System.out.println("Il seggio #"+ i +" ha "+ r +" cabine.");
-		}
-	}
 	
 	public boolean noCabineLibere() {
 		boolean cabineLibere = false;
-		for(int i = 0; i < this.r; i++) {
-			if(cabine[i] == false) {
+		for(int i = 0; i < this.cabine; i++) {
+			if(cabin[i] == false) {
 				cabineLibere = false;
 			}
 		}
@@ -26,8 +16,8 @@ public class Seggio {
 	}
 	
 	public void situazioneCabine() {
-		for(int i = 0; i < this.r; i++) {
-			if(cabine[i] == true) {
+		for(int i = 0; i < this.cabine; i++) {
+			if(cabin[i] == true) {
 				System.out.println("Cabina "+ i + " \tLIBERO");
 			}else {
 				System.out.println("Cabina "+ i + " \tOCCUPATO");
@@ -47,11 +37,11 @@ public class Seggio {
 		{
 			if(c==4)
 			{
-				cabine[i]=false;  
+				cabin[i]=false;  
 			}
 			else
 			{
-				cabine[i]=cabine[j]; //sposto le cabine verso verso sinistra
+				cabin[i]=cabin[j]; //sposto le cabine verso verso sinistra
 			}
 
 			i++;
@@ -81,7 +71,7 @@ public class Seggio {
 			System.out.println("Il Votante ha votato!");
 		}
 		contatoreVotanti++;
-		cabine[(contatoreVotanti - 1)] = true;
+		cabin[contatoreVotanti] = true;
 		System.out.println("Il cliente #"+ idVotante +" entra in cabina ");
 		situazioneCabine();
 		notify();
