@@ -1,33 +1,36 @@
 package Elezioni;
 
 public class Votante extends Thread {
-private int id;
-// private int type = 0;
 private Seggio seggio;
-//private Cabina cabina;
 private boolean haVotato= false;
-int n;
 
-public Votante(int id, Seggio seggio) {
-	super();
-	this.id = id;
-	// this.type = type;
+
+public Votante(String name, Seggio seggio) {
+	super(name);
 	this.seggio = seggio;
-}
-
-public void vota(int n, int votante) {
-	this.haVotato = seggio.vota(n, votante);
 }
 
 @Override
 public void run() {
-	// seggio.mettiInLista(id);
-	while(haVotato != true) {
-		System.out.println(" Votante "+ this.id + "prova a votare nel Seggio #" + seggio.id + " votante");
-		vota(n, id);
-		
+	while(this.haVotato != true) {
+		try {
+			sleep(Math.round(Math.random()*1000));
+			System.out.println(getName()+" si sta recando al seggio.");
+			sleep(Math.round(Math.random()*15000));
+		}catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		//System.out.println(getName() + " entra nel seggio.");
+		seggio.entra();
+		try {
+			sleep(Math.round(Math.random()*1000));
+			System.out.println(getName()+" sta votando.");
+			sleep(Math.round(Math.random()*10000));
+		}catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		//System.out.println(getName() + " esce dal seggio.");
+		this.haVotato = seggio.esce();	
 	}
-	System.out.println(" Votante "+ this.id + "ha votato!");
 }
-
 }
