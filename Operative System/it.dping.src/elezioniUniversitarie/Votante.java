@@ -1,51 +1,50 @@
 package elezioniUniversitarie;
 
 public class Votante extends Thread {
-	int idVotante;
+	int id;
 	boolean haVotato;
-	Categoria cat;
 	Seggio seggio;
-	
-	public Votante(int idVotante, Categoria cat, Seggio seggio) {
-		super();
-		this.idVotante = idVotante;
+
+	public Votante(String name, int id, Seggio seggio) {
+		super(name);
+		this.id = id;
 		this.haVotato = false;
-		this.cat = cat;
 		this.seggio = seggio;
 	}
-	
-	//public void vaiAVotare();
-	
+
 	public boolean accediSeggio() {
 		boolean esito = false;
-		System.out.println("Utente " + idVotante + " sta provando ad accedere al seggio...");
-		esito = seggio.entraCabina(idVotante);
+		System.out.println(getName() + " sta provando ad accedere al seggio...");
+		esito = seggio.mettinInLista(id);
 		return esito;
 	}
-	
-	public boolean vota() {
+
+	public void vota() {
 		try {
-			System.out.println(Thread.currentThread().getName() + " sta votando.");
-			Thread.sleep( /* Math.round(Math.random()* */ 2000);
+			System.out.println(getName() + " sta votando.");
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		return this.haVotato;
 	}
-	
-	public void lasciaSeggio() {
-		System.out.println("Utente " + idVotante + " sta lasciando il seggio...");
-		seggio.liberaCabina(idVotante);
-	}
-	
+
 	@Override
 	public void run() {
-		while(this.haVotato != true) {				
-				if(this.accediSeggio()) {
-					this.vota();
-					this.lasciaSeggio();
-				}
+		while (this.haVotato != true) {
+			try {
+				System.out.println(getName() + " prova ad entrare in un seggio");
+				sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
+			while (!seggio.mettinInLista(this.id)) {
+				seggio.mettinInLista(this.id);
+			}
+			System.out.println(getName() + " è entrato nel seggio " + seggio.name);
+			seggio.entra(this.id);
+			vota();
+			this.haVotato = seggio.esce();
+			// seggio.stampaCoda();
 		}
 	}
-	
+}
