@@ -30,17 +30,17 @@ public class Autostrada {
 		}
 
 		// Thread inizializzati nel costruttore
-		for (int i = 1; i <= nAuto; i++) {
-			auto[i] = new Veicolo("AUTO", caselliIn[r.nextInt(nCIn)], caselliOut[r.nextInt(nCIn)], " #" + i,
+		for (int i = 0; i < nAuto; i++) {
+			auto[i] = new Veicolo("AUTO", caselliIn[r.nextInt(nCIn)], caselliOut[r.nextInt(nCOut)], " #" + i,
 					r.nextBoolean());
 		}
-		for (int i = 1; i <= nPesanti; i++) {
-			pesanti[i] = new Veicolo("PESANTE", caselliIn[r.nextInt(nCIn)], caselliOut[r.nextInt(nCIn)],
-					" #" + i, r.nextBoolean());
+		for (int i = 0; i < nPesanti; i++) {
+			pesanti[i] = new Veicolo("PESANTE", caselliIn[r.nextInt(nCIn)], caselliOut[r.nextInt(nCOut)], " #" + i,
+					r.nextBoolean());
 		}
-		for (int i = 1; i <= nSoccorso; i++) {
-			soccorso[i] = new Veicolo("SOCCORSO", caselliIn[r.nextInt(nCIn)], caselliOut[r.nextInt(nCIn)],
-					" #" + i, r.nextBoolean());
+		for (int i = 0; i < nSoccorso; i++) {
+			soccorso[i] = new Veicolo("SOCCORSO", caselliIn[r.nextInt(nCIn)], caselliOut[r.nextInt(nCOut)], " #" + i,
+					r.nextBoolean());
 		}
 
 	}

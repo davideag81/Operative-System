@@ -1,4 +1,5 @@
 package filosofiACenaD;
+
 import java.util.Random;
 
 /*
@@ -11,34 +12,24 @@ Problemi possibili:
 - Posticipazione indefinita -> meccanica invecchiamento dentro filosofi.
 
 Filosofo -> Thread:
-costruttore
+
 pensa()
-prendiForchettaSX()
-prendiForchettaDX()
-mangia() [incrementa indice invecchiamento] -> RUN
-rilasciaForchettaSX() 
-rilasciaForchette()
-getAging()
+prendiForchette()
+mangia()
+posaForchette()
 
+Tavolo -> Monitor
 
-Forchetta -> Monitor
-risorsa condivisa -> forchetta[5]
-costruttore
-booleano inUso
-getStatus()
-setStatus()
 
 */
 
 public class FilosofiACena {
-    public static void main(String [] args){
-        Filosofo[] filo = new Filosofo[5];
-        Forchette forch = new Forchette();
-        for(int i=0; i<5; i++){
-            filo[i] = new Filosofo(i, forch);
-            filo[i].start();
-        }
-        System.err.println("Main terminato...");
-    } 
+	public static void main(String[] args) {
+		Tavolo tavolo = new Tavolo();
+		Filosofo socrate = new Filosofo(tavolo, 0, "Socrate");
+		Filosofo platone = new Filosofo(tavolo, 1, "Platone");
+		Filosofo aristotele = new Filosofo(tavolo, 2, "Aristotele");
+		Filosofo democrate = new Filosofo(tavolo, 3, "Democrate");
+		Filosofo anassagora = new Filosofo(tavolo, 4, "Anassagora");
+	}
 }
-
